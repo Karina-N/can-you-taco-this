@@ -1,3 +1,4 @@
+// DESCRIPTION FOR PLAYER
 If you like to cook or eat - it never hurts to stare at food! If you agree - read on.
 
 Welcome to my cooking game.
@@ -10,3 +11,14 @@ You collect points by duplicating provided recepie (words or visually).
 - you have 60seconds to complete all orders - be quick!
 
 Let's dig in
+
+// DESCRIPTION FOR DEVELOPER
+
+-> total ingredients in the game: 10.
+
+Level1:
+
+-> size of random recepie displayed: 4
+-> ingredients displayed for player: 4
+-> points to collect for win: 100
+-> timer: 60s
