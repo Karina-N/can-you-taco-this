@@ -10,32 +10,37 @@
   border: 2px solid black;
 }
 
-#gameHeader h1 {
+#game-header h1 {
   text-align: center;
   line-height: 10vh;
 }
 
-#gameStatus {
+#game-status {
   text-align: center;
   line-height: 10vh;
 }
 
-#randomCombination {
+#random-combination {
   border: 1px solid blue;
 }
 
-#playerSelection {
+#player-selection {
   border: 1px solid red;
 }
 
-#listOfAllIngredients {
+#list-of-all-ingredients {
   border: 1px solid green;
 }
 
-#listOfAllIngredients li {
-  border: 1px solid green;
-  height: 15vh;
-  width: 15vh;
+#list-of-all-ingredients li {
+  margin: 16px;
+  height: 13vh;
+  width: 13vh;
+  background-size: cover;
+}
+
+#list-of-all-ingredients li:hover {
+  cursor: pointer;
 }
 
 ul {

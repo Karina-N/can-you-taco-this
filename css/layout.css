@@ -13,16 +13,16 @@
   grid-template-columns: 30vw 1fr;
 }
 
-#randomCombination,
+#random-combination,
 #buttons,
-#playerSelection ul {
+#player-selection ul {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-#playerSelection {
+#player-selection {
   display: grid;
   grid-template-columns: 1fr 20vw;
   grid-template-areas: "list buttons";
@@ -32,11 +32,11 @@
   grid-area: buttons;
 }
 
-#playerSelection ul {
+#player-selection ul {
   grid-area: list;
 }
 
-#listOfAllIngredients ul {
+#list-of-all-ingredients ul {
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: repeat(5, 1fr);

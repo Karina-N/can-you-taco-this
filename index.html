@@ -6,19 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The game</title>
 
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
   </head>
   <body>
     <div class="container">
-      <h1>hello players</h1>
-      <div id="scoreTable"></div>
-      <div id="randomCombination"></div>
-      <div id="playerSelection">
-        <button id="submitSelection">Submit</button>
-        <button id="clearSelection">Clear</button>
+      <div id="game-header"><h1>hello players</h1></div>
+      <div id="game-status">
+        <div id="score-table"></div>
       </div>
-      <div id="listOfAllIngredients"></div>
+      <div id="middle">
+        <div id="random-combination"></div>
+        <div id="player-selection">
+          <div id="buttons">
+            <button id="submit-selection">Submit</button>
+            <button id="clear-selection">Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="list-of-all-ingredients"></div>
     </div>
+
     <script src="./js/cookingGame.js" type="module"></script>
     <script src="./js/index.js" type="module"></script>
   </body>
