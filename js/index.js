@@ -23,7 +23,11 @@ randomCombinationDiv.appendChild(randomRecipe);
 
 function renderRecipe() {
   cookingGame.createRandomRecipe().forEach((item) => {
-    randomRecipe.innerHTML += `<li>${item.name}</li>`;
+    console.log(item);
+    const randomRecipeItem = document.createElement("li");
+    randomRecipe.appendChild(randomRecipeItem);
+    randomRecipeItem.setAttribute("style", `background-image: url(${item.img})`);
+    // randomRecipe.innerHTML += `<li>${item.name}</li>`;
   });
 }
 renderRecipe();
@@ -33,14 +37,7 @@ const listOfAllIngredientsDiv = document.getElementById("list-of-all-ingredients
 const allIngredientsUL = document.createElement("ul");
 listOfAllIngredientsDiv.appendChild(allIngredientsUL);
 
-// generate base ingredients list
-// const listedIngredient = document.createElement("li");
-// allIngredientsUL.appendChild(listedIngredient);
-// listedIngredient.innerHTML = baseIngredients.name;
-// listedIngredient.setAttribute("class", "ingredient");
-// listedIngredient.setAttribute("style", `background-image: url(${baseIngredients.img})`);
-
-// generate random ingredients list
+// generate all ingredients list
 for (let i = 0; i < allIngredients.length; i++) {
   const listedIngredient = document.createElement("li");
   allIngredientsUL.appendChild(listedIngredient);
@@ -55,6 +52,28 @@ const playerSelectionDiv = document.getElementById("player-selection");
 let playerSelectionList = [];
 const playerSelectionUl = document.createElement("ul");
 playerSelectionDiv.appendChild(playerSelectionUl);
+
+// const listItem = document.querySelectorAll("#list-of-all-ingredients li");
+document.querySelector("#list-of-all-ingredients").addEventListener("click", function (e) {
+  // if the selection not full yet, add another item
+  if (playerSelectionList.length < cookingGame.recipeLength) {
+    playerSelectionUl.innerHTML = "";
+
+    if (e.target.classList.contains("ingredient")) {
+      const indexOfClickedElement = allIngredients.findIndex(
+        (i) => i.name === e.target.getAttribute("data-ingredient")
+      );
+      playerSelectionList.unshift(allIngredients[indexOfClickedElement]);
+
+      playerSelectionList.forEach((item) => {
+        const listItem = document.createElement("li");
+        playerSelectionUl.appendChild(listItem);
+        listItem.setAttribute("style", `background-image: url(${item.img})`);
+        listItem.setAttribute("data-ingredient", item.name);
+      });
+    }
+  }
+});
 
 function clearPlayerSelection() {
   playerSelectionUl.innerHTML = "";
@@ -83,28 +102,6 @@ function submitPlayerSelection() {
   clearPlayerSelection();
 }
 
-// const listItem = document.querySelectorAll("#list-of-all-ingredients li");
-document.querySelector("#list-of-all-ingredients").addEventListener("click", function (e) {
-  if (playerSelectionList.length < cookingGame.recipeLength) {
-    playerSelectionUl.innerHTML = "";
-
-    if (e.target.classList.contains("ingredient")) {
-      // playerSelectionList.unshift(baseIngredients);
-
-      const indexOfClickedElement = allIngredients.findIndex(
-        (i) => i.name === e.target.getAttribute("data-ingredient")
-      );
-      playerSelectionList.unshift(allIngredients[indexOfClickedElement]);
-
-      playerSelectionList.forEach((item) => {
-        const listItem = document.createElement("li");
-        playerSelectionUl.appendChild(listItem);
-        listItem.innerHTML = item.name;
-      });
-    }
-  }
-});
-
 // CLEAR BUTTON
 const clearButton = document.getElementById("clear-selection");
 clearButton.addEventListener("click", clearPlayerSelection);
@@ -113,7 +110,7 @@ clearButton.addEventListener("click", clearPlayerSelection);
 const submitButton = document.getElementById("submit-selection");
 submitButton.addEventListener("click", submitPlayerSelection);
 
-// DISPLAY POINT
+// DISPLAY POINTS
 const scoreTable = document.getElementById("score-table");
 scoreTable.innerHTML = `Player points:  ${cookingGame.playerPoints} / ${cookingGame.maxPoints}`;
 

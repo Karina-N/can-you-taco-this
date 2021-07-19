@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-rows: 10vh 10vh 1fr 1fr;
+  grid-template-rows: 8vh 8vh 40vh 1fr;
   grid-template-areas:
     "header"
     "status"
@@ -38,7 +38,6 @@
 
 #list-of-all-ingredients ul {
   display: grid;
-  grid-template-rows: 1fr 1fr;
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
 }

@@ -6,7 +6,7 @@
 .container {
   width: 94vw;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 35px;
   border: 2px solid black;
 }
 
@@ -21,15 +21,30 @@
 }
 
 #random-combination {
-  border: 1px solid blue;
+  background-color: yellow;
+  padding: 20px 0;
 }
 
+#random-combination li {
+  margin: 5px;
+  height: 8vh;
+  width: 8vh;
+  background-size: cover;
+}
 #player-selection {
-  border: 1px solid red;
+  background-color: greenyellow;
+  padding: 20px 0;
+}
+
+#player-selection li {
+  margin: 5px;
+  height: 8vh;
+  width: 8vh;
+  background-size: cover;
 }
 
 #list-of-all-ingredients {
-  border: 1px solid green;
+  padding: 30px 0;
 }
 
 #list-of-all-ingredients li {
