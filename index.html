@@ -11,9 +11,14 @@
   </head>
   <body>
     <div class="container">
-      <div id="game-header"><h1>hello players</h1></div>
+      <div id="game-header"><h1>hello player</h1></div>
       <div id="game-status">
+        <div id="level">LEVEL 1</div>
         <div id="score-table"></div>
+        <div id="timer">
+          <span id="secDec" class="number">0</span>
+          <span id="secUni" class="number">0</span>
+        </div>
       </div>
       <div id="middle">
         <div id="random-combination"></div>
@@ -28,6 +33,7 @@
       <div id="list-of-all-ingredients"></div>
     </div>
 
+    <script src="./js/Chronometer.js" type="module"></script>
     <script src="./js/cookingGame.js" type="module"></script>
     <script src="./js/index.js" type="module"></script>
   </body>

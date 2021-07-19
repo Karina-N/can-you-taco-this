@@ -8,6 +8,12 @@
     "bottom";
 }
 
+#game-status {
+  grid-area: status;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 #middle {
   display: grid;
   grid-template-columns: 30vw 1fr;

@@ -1,3 +1,4 @@
+import Chronometer from "./Chronometer.js";
 import CookingGame from "./CookingGame.js";
 
 const baseIngredients = [{ name: "taco shell", img: "/images/taco-shell.png" }];
@@ -14,7 +15,10 @@ const randomIngredients = [
 ];
 
 const allIngredients = baseIngredients.concat(randomIngredients);
+
+// LEVEL 1
 const cookingGame = new CookingGame(baseIngredients, randomIngredients, 100, 4);
+const chronometer = new Chronometer(30);
 
 // Displaying randomRecipe
 const randomCombinationDiv = document.getElementById("random-combination");
@@ -119,7 +123,42 @@ function displayPoints() {
 }
 
 function checkIfWon() {
-  if (cookingGame.playerPoints === cookingGame.maxPoints) {
+  if (cookingGame.playerPoints === cookingGame.maxPoints && chronometer.currentTime > 0) {
+    chronometer.stop();
+    secDecElement.innerHTML = 0;
+    secUniElement.innerHTML = 0;
     return true;
+  }
+}
+
+// TIMER
+const secDecElement = document.getElementById("secDec");
+const secUniElement = document.getElementById("secUni");
+
+window.addEventListener("onload", chronometer.start(printTime));
+
+function printTime() {
+  if (chronometer.currentTime < 1) {
+    chronometer.stop();
+    secDecElement.innerHTML = 0;
+    secUniElement.innerHTML = 0;
+
+    cookingGame.randomRecipe = [];
+    randomRecipe.innerHTML = "";
+    clearPlayerSelection();
+    cookingGame.randomRecipe = [];
+    randomRecipe.innerHTML = "";
+    alert("BETTER LUCK NEXT TIME!");
+  } else {
+    printSeconds();
+  }
+
+  function printSeconds() {
+    let seconds = chronometer.computeTwoDigitNumber(chronometer.getSeconds());
+    let firstDigit = seconds.toString()[0];
+    let secondDigit = seconds.toString()[1];
+
+    secDecElement.innerHTML = firstDigit;
+    secUniElement.innerHTML = secondDigit;
   }
 }
