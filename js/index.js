@@ -36,6 +36,7 @@ for (let i = 0; i < allIngredientsArray.length; i++) {
   const listedIngredient = document.createElement("li");
   allIngredientsUL.appendChild(listedIngredient);
   listedIngredient.innerHTML = allIngredientsArray[i].name;
+  listedIngredient.setAttribute("class", "ingredient");
 }
 
 // Displaying player selection
@@ -76,13 +77,15 @@ document.querySelector("#listOfAllIngredients").addEventListener("click", functi
   if (playerSelectionList.length < cookingGame.recipeLength) {
     playerSelectionUl.innerHTML = "";
 
-    const indexOfClickedElement = allIngredientsArray.findIndex((i) => i.name === e.target.innerHTML);
-    playerSelectionList.unshift(allIngredientsArray[indexOfClickedElement]);
-    playerSelectionList.forEach((item) => {
-      const listItem = document.createElement("li");
-      playerSelectionUl.appendChild(listItem);
-      listItem.innerHTML = item.name;
-    });
+    if (e.target.classList.contains("ingredient")) {
+      const indexOfClickedElement = allIngredientsArray.findIndex((i) => i.name === e.target.innerHTML);
+      playerSelectionList.unshift(allIngredientsArray[indexOfClickedElement]);
+      playerSelectionList.forEach((item) => {
+        const listItem = document.createElement("li");
+        playerSelectionUl.appendChild(listItem);
+        listItem.innerHTML = item.name;
+      });
+    }
   }
 });
 
