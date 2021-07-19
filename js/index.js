@@ -112,7 +112,7 @@ submitButton.addEventListener("click", submitPlayerSelection);
 
 // DISPLAY POINTS
 const scoreTable = document.getElementById("score-table");
-scoreTable.innerHTML = `Player points:  ${cookingGame.playerPoints} / ${cookingGame.maxPoints}`;
+scoreTable.innerHTML = `PLAYER POINTS:  ${cookingGame.playerPoints} / ${cookingGame.maxPoints}`;
 
 function displayPoints() {
   scoreTable.innerHTML = `${cookingGame.playerPoints} / ${cookingGame.maxPoints}`;

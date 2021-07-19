@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-rows: 8vh 8vh 40vh 1fr;
+  grid-template-rows: 6vh 8vh 40vh 1fr;
   grid-template-areas:
     "header"
     "status"
