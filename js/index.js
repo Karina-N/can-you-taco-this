@@ -1,7 +1,7 @@
 import CookingGame from "./CookingGame.js";
 
+const baseIngredient = { name: "taco shell", img: "" };
 const allIngredientsArray = [
-  { name: "taco shell", img: "" },
   { name: "beef", img: "" },
   { name: "beans", img: "" },
   { name: "salsa", img: "" },
@@ -13,7 +13,7 @@ const allIngredientsArray = [
   { name: "jalapenos", img: "" },
 ];
 
-const cookingGame = new CookingGame(allIngredientsArray, 100, 4);
+const cookingGame = new CookingGame(baseIngredient, allIngredientsArray, 100, 4);
 
 // Displaying randomRecipe
 const randomCombinationDiv = document.getElementById("randomCombination");
@@ -32,6 +32,13 @@ const listOfAllIngredientsDiv = document.getElementById("listOfAllIngredients");
 const allIngredientsUL = document.createElement("ul");
 listOfAllIngredientsDiv.appendChild(allIngredientsUL);
 
+// generate base ingredients list
+const listedIngredient = document.createElement("li");
+allIngredientsUL.appendChild(listedIngredient);
+listedIngredient.innerHTML = baseIngredient.name;
+listedIngredient.setAttribute("class", "ingredient");
+
+// generate all ingredietns list
 for (let i = 0; i < allIngredientsArray.length; i++) {
   const listedIngredient = document.createElement("li");
   allIngredientsUL.appendChild(listedIngredient);

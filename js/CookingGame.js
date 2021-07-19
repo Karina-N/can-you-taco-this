@@ -1,5 +1,6 @@
 class CookingGame {
-  constructor(allIngredientsArray, maxPoints, recipeLength) {
+  constructor(baseIngredient, allIngredientsArray, maxPoints, recipeLength) {
+    this.baseIngredient = baseIngredient;
     this.allIngredientsArray = allIngredientsArray;
     this.maxPoints = maxPoints;
     this.recipeLength = recipeLength;
@@ -8,9 +9,11 @@ class CookingGame {
   }
 
   createRandomRecipe() {
-    for (let i = 0; i < this.recipeLength; i++) {
+    this.randomRecipe.unshift(this.baseIngredient);
+    for (let i = 0; this.randomRecipe.length < this.recipeLength; i++) {
       let randomIngredient = this.allIngredientsArray[Math.floor(Math.random() * this.allIngredientsArray.length)];
-      const result = this.randomRecipe.some((item) => item.name === randomIngredient.name);
+      const result = this.randomRecipe.includes(randomIngredient);
+
       if (!result) {
         this.randomRecipe.unshift(randomIngredient);
       }
