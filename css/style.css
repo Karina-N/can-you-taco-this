@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 94vw;
+  margin: auto;
+  margin-top: 40px;
+  border: 2px solid black;
+}
+
+#gameHeader h1 {
+  text-align: center;
+  line-height: 10vh;
+}
+
+#gameStatus {
+  text-align: center;
+  line-height: 10vh;
+}
+
+#randomCombination {
+  border: 1px solid blue;
+}
+
+#playerSelection {
+  border: 1px solid red;
+}
+
+#listOfAllIngredients {
+  border: 1px solid green;
+}
+
+#listOfAllIngredients li {
+  border: 1px solid green;
+  height: 15vh;
+  width: 15vh;
+}
+
+ul {
+  list-style-type: none;
+}
