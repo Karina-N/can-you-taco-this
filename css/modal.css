@@ -1,0 +1,31 @@
+.modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  justify-content: center;
+}
+
+.modal-header h5 {
+  font-weight: bold;
+}
+.modal-body,
+.modal-footer {
+  border: none;
+}
+
+.modal-body {
+  text-align: center;
+  padding-bottom: 0rem;
+}
+.modal-footer {
+  justify-content: center;
+}
+
+.modal-footer button {
+  border: none;
+  font-weight: bold;
+}
+
+.modal-footer button:hover {
+  border: none;
+  background-color: yellow;
+  color: black;
+}

@@ -9,7 +9,7 @@
   width: 90vw;
   height: 90vh;
   margin: 30px auto;
-  border: 2px solid black;
+  border: px solid black;
 }
 
 .header,
@@ -17,6 +17,15 @@
   text-align: center;
   line-height: 1.8;
   margin-bottom: 40px;
+}
+
+h1,
+ul {
+  margin: 20px 0;
+}
+
+li {
+  list-style-type: none;
 }
 
 .middle div {
