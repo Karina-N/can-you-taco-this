@@ -15,13 +15,11 @@ randomCombinationDiv.appendChild(randomRecipe);
 
 function renderRecipe() {
   cookingGame.createRandomRecipe().forEach((item) => {
-    console.log(item);
     const randomRecipeItem = document.createElement("li");
     randomRecipe.appendChild(randomRecipeItem);
     randomRecipeItem.setAttribute("style", `background-image: url(${item.img})`);
   });
 }
-renderRecipe();
 
 // Displaying list of all ingredients to be clicked
 const listOfAllIngredientsDiv = document.getElementById("list-of-all-ingredients");
@@ -126,8 +124,6 @@ function checkIfWon() {
 const secDecElement = document.getElementById("secDec");
 const secUniElement = document.getElementById("secUni");
 
-window.addEventListener("onload", chronometer.start(printTime));
-
 function printTime() {
   if (chronometer.currentTime < 1) {
     chronometer.stop();
@@ -153,3 +149,16 @@ function printTime() {
     secUniElement.innerHTML = secondDigit;
   }
 }
+
+// MODAL
+const modalElm = document.getElementById("exampleModal");
+modalElm.setAttribute("data-backdrop", "static");
+
+$(window).on("load", function () {
+  $("#exampleModal").modal("show");
+});
+
+$("#exampleModal").on("hidden.bs.modal", function () {
+  renderRecipe();
+  chronometer.start(printTime);
+});
