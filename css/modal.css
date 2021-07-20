@@ -32,5 +32,6 @@
 .modal-footer button:hover {
   border: none;
   background-color: yellow;
+  box-shadow: 4px 4px #6c757d;
   color: black;
 }
