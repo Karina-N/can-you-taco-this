@@ -4,37 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The game</title>
-
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>The-game</title>
   </head>
   <body>
     <div class="container">
-      <div id="game-header"><h1>hello player</h1></div>
-      <div id="game-status">
-        <div id="level">LEVEL 1</div>
-        <div id="score-table"></div>
-        <div id="timer">
-          <span id="secDec" class="number">0</span>
-          <span id="secUni" class="number">0</span>
-        </div>
+      <div class="header">
+        <h1>Welcome to my cooking game.</h1>
+        <p>If you like to cook or eat - it never hurts to stare at food! If you agree - read on.</p>
+
+        <p>The goal of the game is to collect set amount of points within given time limit.</p>
+        <ul>
+          You collect points by duplicating provided recipe
+          <li>for every exact copy you receive 10points</li>
+          <li>if you missed ingredient or mixed order - start over!</li>
+          <li>you have 60seconds to complete all orders - be quick!</li>
+        </ul>
       </div>
-      <div id="middle">
-        <div id="random-combination"></div>
-        <div id="player-selection">
-          <div id="buttons">
-            <button id="submit-selection">SUBMIT</button>
-            <button id="clear-selection">CLEAR</button>
+      <div class="middle">
+        <h2>Pick your food</h2>
+        <div>
+          <div class="start-button-div taco">
+            <a class="start-button" id="taco-button" href="/gamePage.html"></a>
+          </div>
+          <div class="start-button-div burger">
+            <a class="start-button" id="burger-button" href="/gamePage.html"></a>
           </div>
         </div>
       </div>
-
-      <div id="list-of-all-ingredients"></div>
     </div>
-
-    <script src="./js/Chronometer.js" type="module"></script>
-    <script src="./js/cookingGame.js" type="module"></script>
-    <script src="./js/index.js" type="module"></script>
   </body>
 </html>

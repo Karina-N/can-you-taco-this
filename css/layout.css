@@ -8,19 +8,19 @@
     "bottom";
 }
 
-#game-status {
+.game-status {
   grid-area: status;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
-#middle {
+.middle {
   display: grid;
   grid-template-columns: 30vw 1fr;
 }
 
 #random-combination,
-#buttons,
+.buttons,
 #player-selection ul {
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@
   grid-template-areas: "list buttons";
 }
 
-#buttons {
+.buttons {
   grid-area: buttons;
 }
 

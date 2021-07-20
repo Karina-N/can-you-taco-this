@@ -1,18 +1,6 @@
 import Chronometer from "./Chronometer.js";
 import CookingGame from "./CookingGame.js";
-
-const baseIngredients = [{ name: "taco shell", img: "/images/taco-shell.png" }];
-const randomIngredients = [
-  { name: "beef", img: "/images/beef.png" },
-  { name: "beans", img: "/images/beans.png" },
-  { name: "tomatoes", img: "/images/tomatoes.png" },
-  { name: "lettuce", img: "/images/lettuce.png" },
-  { name: "onions", img: "/images/onions.png" },
-  { name: "cheese", img: "/images/cheese.png" },
-  { name: "guacamole", img: "/images/guacamole.png" },
-  { name: "sweetcorn", img: "/images/sweetcorn.png" },
-  { name: "jalapenos", img: "/images/jalapenos.png" },
-];
+import { baseIngredients, randomIngredients } from "./data.js";
 
 const allIngredients = baseIngredients.concat(randomIngredients);
 

@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  background-color: #a5dc69;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+  width: 90vw;
+  height: 90vh;
+  margin: 30px auto;
+  border: 2px solid black;
+}
+
+.header,
+.middle {
+  text-align: center;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.middle div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.start-button-div {
+  height: 140px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-button {
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  line-height: 11;
+  height: 90%;
+  width: 90%;
+}
+
+#taco-button {
+  background-image: url(/images/hard-taco.png);
+  background-size: cover;
+}
+
+#burger-button {
+  background-image: url(/images/burger.png);
+  background-size: cover;
+}
+
+.start-button:hover {
+  transform: scale(1.2);
+  transition: transform 0.4s;
+}
