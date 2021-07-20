@@ -1,10 +1,12 @@
 * {
   margin: 0;
   padding: 0;
-  background-color: #a5dc69;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+body {
+  background-color: #a5dc69;
+}
 .container {
   width: 94vw;
   margin: 30px auto;
@@ -58,8 +60,15 @@ button {
   width: 160px;
 }
 
-.buttons h4 {
+button:focus {
+  outline: none;
+}
+
+.buttons #try-again-button {
   color: #ed4234;
+}
+.buttons #well-done-button {
+  color: #437320;
 }
 
 #list-of-all-ingredients {

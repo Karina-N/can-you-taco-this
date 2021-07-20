@@ -19,7 +19,6 @@ function renderRecipe() {
     const randomRecipeItem = document.createElement("li");
     randomRecipe.appendChild(randomRecipeItem);
     randomRecipeItem.setAttribute("style", `background-image: url(${item.img})`);
-    // randomRecipe.innerHTML += `<li>${item.name}</li>`;
   });
 }
 renderRecipe();
@@ -33,7 +32,6 @@ listOfAllIngredientsDiv.appendChild(allIngredientsUL);
 for (let i = 0; i < allIngredients.length; i++) {
   const listedIngredient = document.createElement("li");
   allIngredientsUL.appendChild(listedIngredient);
-  // listedIngredient.innerHTML = allIngredients[i].name;
   listedIngredient.setAttribute("class", "ingredient");
   listedIngredient.setAttribute("style", `background-image: url(${allIngredients[i].img})`);
   listedIngredient.setAttribute("data-ingredient", allIngredients[i].name);
@@ -45,8 +43,11 @@ let playerSelectionList = [];
 const playerSelectionUl = document.createElement("ul");
 playerSelectionDiv.appendChild(playerSelectionUl);
 
-// const listItem = document.querySelectorAll("#list-of-all-ingredients li");
 document.querySelector("#list-of-all-ingredients").addEventListener("click", function (e) {
+  const tryAgainMessage = document.querySelector("#try-again-button");
+  tryAgainMessage.setAttribute("style", "display:none");
+  const wellDoneMessage = document.querySelector("#well-done-button");
+  wellDoneMessage.setAttribute("style", "display:none");
   // if the selection not full yet, add another item
   if (playerSelectionList.length < cookingGame.recipeLength) {
     playerSelectionUl.innerHTML = "";
@@ -76,7 +77,6 @@ function submitPlayerSelection() {
   const originalArray = cookingGame.randomRecipe.map((item) => item.name);
   const createdArray = playerSelectionList.map((item) => item.name);
   if (JSON.stringify(originalArray) === JSON.stringify(createdArray)) {
-    alert("YOU ARE RIGHT");
     cookingGame.playerPoints += 50;
     displayPoints();
     if (checkIfWon()) {
@@ -84,12 +84,15 @@ function submitPlayerSelection() {
       cookingGame.randomRecipe = [];
       randomRecipe.innerHTML = "";
     } else {
+      const wellDoneMessage = document.querySelector("#well-done-button");
+      wellDoneMessage.setAttribute("style", "display:block");
       cookingGame.randomRecipe = [];
       randomRecipe.innerHTML = "";
       renderRecipe();
     }
   } else {
-    alert("TRY AGAIN");
+    const tryAgainMessage = document.querySelector("#try-again-button");
+    tryAgainMessage.setAttribute("style", "display:block");
   }
   clearPlayerSelection();
 }
