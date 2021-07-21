@@ -24,4 +24,24 @@ const randomIngredientsBurger = [
   { name: "jalapenos", img: "./images/jalapenos.png" },
 ];
 
-export { baseIngredientsTaco, randomIngredientsTaco, baseIngredientsBurger, randomIngredientsBurger };
+const baseIngredientsSalad = [{ name: "lettuce", img: "./images/lettuce.png" }];
+const randomIngredientsSalad = [
+  { name: "cucumber", img: "./images/cucumber.png" },
+  { name: "paprika", img: "./images/paprika.png" },
+  { name: "tomatoes", img: "./images/tomatoes.png" },
+  { name: "olive oil", img: "./images/olive-oil.png" },
+  { name: "onions", img: "./images/onions.png" },
+  { name: "radishes", img: "./images/radishes.png" },
+  { name: "egg", img: "./images/egg.png" },
+  { name: "sweetcorn", img: "./images/sweetcorn.png" },
+  { name: "avocado", img: "./images/avocado.png" },
+];
+
+export {
+  baseIngredientsTaco,
+  randomIngredientsTaco,
+  baseIngredientsBurger,
+  randomIngredientsBurger,
+  baseIngredientsSalad,
+  randomIngredientsSalad,
+};

@@ -2,14 +2,14 @@
   margin: 0;
   padding: 0;
   background-color: #a5dc69;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .container {
-  width: 90vw;
-  height: 90vh;
-  margin: 30px auto;
-  border: px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .header,
@@ -19,47 +19,50 @@
   margin-bottom: 40px;
 }
 
-h1,
-ul {
+img {
+  height: 60px;
+  margin-left: 10px;
+  margin-bottom: -16px;
+}
+
+h1 {
   margin: 20px 0;
 }
 
-li {
-  list-style-type: none;
+.header > p {
+  margin-bottom: 20px;
 }
 
 .middle div {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 40px;
-}
-
-.start-button-div {
-  height: 140px;
-  width: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.start-button-div {
+  height: 140px;
+  width: 140px;
+  margin: 20px 20px;
+}
+
 .start-button {
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  line-height: 11;
   height: 90%;
   width: 90%;
+  background-size: cover;
 }
 
 #taco-button {
   background-image: url(../images/hard-taco.png);
-  background-size: cover;
 }
 
 #burger-button {
   background-image: url(../images/burger.png);
-  background-size: cover;
+  height: 80%;
+  width: 80%;
+}
+
+#salad-button {
+  background-image: url(../images/salad.png);
 }
 
 .start-button:hover {

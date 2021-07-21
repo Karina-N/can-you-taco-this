@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-rows: 6vh 8vh 40vh 38vh;
+  grid-template-rows: 6vh 8vh 45vh 30vh;
   grid-template-areas:
     "header"
     "status"
@@ -16,10 +16,10 @@
 
 .middle {
   display: grid;
-  grid-template-columns: 40% 50%;
+  grid-template-columns: 40% 60%;
 }
 
-#random-combination,
+.random-combination-div,
 .buttons,
 #player-selection {
   display: flex;
@@ -30,7 +30,7 @@
 
 .player-selection-div {
   display: grid;
-  grid-template-columns: 1fr 20vw;
+  grid-template-columns: 45% 40%;
   grid-template-areas: "list buttons";
 }
 

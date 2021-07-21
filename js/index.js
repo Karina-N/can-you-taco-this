@@ -1,6 +1,13 @@
 import Chronometer from "./Chronometer.js";
 import CookingGame from "./CookingGame.js";
-import { baseIngredientsTaco, randomIngredientsTaco, baseIngredientsBurger, randomIngredientsBurger } from "./data.js";
+import {
+  baseIngredientsTaco,
+  randomIngredientsTaco,
+  baseIngredientsBurger,
+  randomIngredientsBurger,
+  baseIngredientsSalad,
+  randomIngredientsSalad,
+} from "./data.js";
 
 const levelElm = document.getElementById("level");
 const scoreTable = document.getElementById("score-table");
@@ -22,6 +29,9 @@ if (myParam === "taco") {
 } else if (myParam === "burger") {
   baseIngredients = baseIngredientsBurger;
   randomIngredients = randomIngredientsBurger;
+} else if (myParam === "salad") {
+  baseIngredients = baseIngredientsSalad;
+  randomIngredients = randomIngredientsSalad;
 }
 
 // initial level setup
@@ -43,6 +53,7 @@ const cookingGame = new CookingGame(
 const chronometer = new Chronometer(levelSettings[currentLevel].time);
 
 function startNewGame() {
+  listOfAllIngredientsElm.innerHTML = "";
   displayPoints();
   levelElm.innerHTML = `LEVEL ${currentLevel + 1}`;
   const recipe = cookingGame.createRandomRecipe();
