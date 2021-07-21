@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-rows: 6vh 8vh 40vh 1fr;
+  grid-template-rows: 6vh 8vh 40vh 38vh;
   grid-template-areas:
     "header"
     "status"
@@ -16,7 +16,7 @@
 
 .middle {
   display: grid;
-  grid-template-columns: 30vw 1fr;
+  grid-template-columns: 40% 50%;
 }
 
 #random-combination,

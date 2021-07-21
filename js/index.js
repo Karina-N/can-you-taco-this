@@ -2,12 +2,14 @@ import Chronometer from "./Chronometer.js";
 import CookingGame from "./CookingGame.js";
 import { baseIngredientsTaco, randomIngredientsTaco, baseIngredientsBurger, randomIngredientsBurger } from "./data.js";
 
+const randomCombinationElm = document.getElementById("random-combination");
+const playerSelectionElm = document.getElementById("player-selection");
+const listOfAllIngredientsElm = document.getElementById("list-of-all-ingredients");
+const messageElm = document.querySelector("#message");
+
 let baseIngredients;
 let randomIngredients;
 let playerSelectionList = [];
-
-const randomCombinationElm = document.getElementById("random-combination");
-const listOfAllIngredientsElm = document.getElementById("list-of-all-ingredients");
 
 // get query params
 const urlParams = new URLSearchParams(window.location.search);
@@ -20,24 +22,24 @@ if (myParam === "taco") {
   randomIngredients = randomIngredientsBurger;
 }
 
+// initial game setup
+let currentLevel = 1;
+let gameTime = 45;
+let gamePoints = 50;
+let gameRecipeLength = 4;
+
 const allIngredients = baseIngredients.concat(randomIngredients);
-
-// LEVEL 1
-const cookingGame = new CookingGame(baseIngredients, randomIngredients, 100, 4);
-const chronometer = new Chronometer(30);
-
-// function startNewGame(level = 1) {
-//   if (level === 2) {
-//     // cookingGame.randomIngredients = myArray;
-//     cookingGame.maxPoints = 400;
-//   }
-//   const recipe = cookingGame.createRandomRecipe();
-//   renderRecipe(recipe);
-//   chronometer.start(printTime);
-// }
+const arrayOfAvailableIngredients = allIngredients;
+const cookingGame = new CookingGame(baseIngredients, randomIngredients, gamePoints, gameRecipeLength);
+const chronometer = new Chronometer(gameTime);
 
 function startNewGame() {
+  // if (currentLevel === 2) {
+  //   gameTime = 45;
+  //   gamePoints = 60;
+  // }
   const recipe = cookingGame.createRandomRecipe();
+  renderIngredientsList(arrayOfAvailableIngredients);
   renderRecipe(recipe);
   chronometer.start(printTime);
 }
@@ -50,23 +52,35 @@ function renderRecipe(recipe) {
   });
 }
 
-// generate all ingredients list
-for (let i = 0; i < allIngredients.length; i++) {
-  const listedIngredient = document.createElement("li");
-  listOfAllIngredientsElm.appendChild(listedIngredient);
-  listedIngredient.setAttribute("class", "ingredient");
-  listedIngredient.setAttribute("style", `background-image: url("${allIngredients[i].img}")`);
-  listedIngredient.setAttribute("data-ingredient", allIngredients[i].name);
+function renderIngredientsList(arrayOfAvailableIngredients) {
+  for (let i = 0; i < arrayOfAvailableIngredients.length; i++) {
+    const listedIngredient = document.createElement("li");
+    listOfAllIngredientsElm.appendChild(listedIngredient);
+    listedIngredient.setAttribute("class", "ingredient");
+    listedIngredient.setAttribute("style", `background-image: url("${arrayOfAvailableIngredients[i].img}")`);
+    listedIngredient.setAttribute("data-ingredient", arrayOfAvailableIngredients[i].name);
+  }
 }
 
-// Displaying player selection
-const playerSelectionElm = document.getElementById("player-selection");
+function renderMessage(status) {
+  if (status === "success") {
+    messageElm.innerHTML = "Well done!";
+    messageElm.style.color = "green";
+    messageElm.style.display = "block";
+  } else if (status === "failure") {
+    messageElm.innerHTML = "Try again!";
+    messageElm.style.color = "#ed4234";
+    messageElm.style.display = "block";
+  }
+}
+
+function removeMessage() {
+  messageElm.innerHTML = "";
+}
 
 document.querySelector("#list-of-all-ingredients").addEventListener("click", function (e) {
-  const tryAgainMessage = document.querySelector("#try-again-button");
-  tryAgainMessage.setAttribute("style", "display:none");
-  const wellDoneMessage = document.querySelector("#well-done-button");
-  wellDoneMessage.setAttribute("style", "display:none");
+  removeMessage();
+
   // if the selection not full yet, add another item
   if (playerSelectionList.length < cookingGame.recipeLength) {
     playerSelectionElm.innerHTML = "";
@@ -96,22 +110,21 @@ function submitPlayerSelection() {
   const originalArray = cookingGame.randomRecipe.map((item) => item.name);
   const createdArray = playerSelectionList.map((item) => item.name);
   if (JSON.stringify(originalArray) === JSON.stringify(createdArray)) {
-    cookingGame.playerPoints += 100;
+    cookingGame.playerPoints += 10;
+    renderMessage("success");
     displayPoints();
     if (checkIfWon()) {
       alert(`WOW, YOU WON THE GAME!!`);
       cookingGame.randomRecipe = [];
       randomCombinationElm.innerHTML = "";
     } else {
-      const wellDoneMessage = document.querySelector("#well-done-button");
-      wellDoneMessage.setAttribute("style", "display:block");
       cookingGame.randomRecipe = [];
       randomCombinationElm.innerHTML = "";
-      renderRecipe();
+      const recipe = cookingGame.createRandomRecipe();
+      renderRecipe(recipe);
     }
   } else {
-    const tryAgainMessage = document.querySelector("#try-again-button");
-    tryAgainMessage.setAttribute("style", "display:block");
+    renderMessage("failure");
   }
   clearPlayerSelection();
 }
@@ -134,6 +147,8 @@ function displayPoints() {
 
 function checkIfWon() {
   if (cookingGame.playerPoints === cookingGame.maxPoints && chronometer.currentTime > 0) {
+    currentLevel++;
+    $("#exampleModal").modal("show");
     chronometer.stop();
     secDecElement.innerHTML = 0;
     secUniElement.innerHTML = 0;
@@ -179,6 +194,29 @@ $(window).on("load", function () {
   $("#exampleModal").modal("show");
 });
 
+$("#exampleModal").on("show.bs.modal", function (event) {
+  var modal = $(this);
+  // if (currentLevel === 1) {
+  modal.find("#modal-title").html(`Welcome to level ${currentLevel}`);
+  modal.find("#modal-inner-text").html(`Collect ${gamePoints} points in ${gameTime} seconds`);
+  // }
+  // var button = $(event.relatedTarget) // Button that triggered the modal
+  // var recipient = button.data('whatever') // Extract info from data-* attributes
+  // // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  // var modal = $(this);
+  // modal.find("#modal-title").html(`Welcome to level ${currentLevel}`);
+  // modal.find("#modal-inner-text").html(`Collect ${gamePoints} points in ${gameTime} seconds`);
+  // modal.find('.modal-body input').val(recipient)
+});
+
 $("#exampleModal").on("hidden.bs.modal", function () {
   startNewGame();
 });
+
+/*
+if (points > 400) {
+  currentLevel++;
+  $("#exampleModal").modal("show");
+}
+*/

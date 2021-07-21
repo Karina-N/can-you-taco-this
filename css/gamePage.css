@@ -64,11 +64,15 @@ button:focus {
   outline: none;
 }
 
-.buttons #try-again-button {
+/* .buttons #try-again-button {
   color: #ed4234;
 }
 .buttons #well-done-button {
   color: #437320;
+} */
+
+#message {
+  display: none;
 }
 
 #list-of-all-ingredients {
