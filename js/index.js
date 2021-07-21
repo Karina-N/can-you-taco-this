@@ -2,6 +2,8 @@ import Chronometer from "./Chronometer.js";
 import CookingGame from "./CookingGame.js";
 import { baseIngredientsTaco, randomIngredientsTaco, baseIngredientsBurger, randomIngredientsBurger } from "./data.js";
 
+const levelElm = document.getElementById("level");
+const scoreTable = document.getElementById("score-table");
 const randomCombinationElm = document.getElementById("random-combination");
 const playerSelectionElm = document.getElementById("player-selection");
 const listOfAllIngredientsElm = document.getElementById("list-of-all-ingredients");
@@ -22,22 +24,27 @@ if (myParam === "taco") {
   randomIngredients = randomIngredientsBurger;
 }
 
-// initial game setup
-let currentLevel = 1;
-let gameTime = 45;
-let gamePoints = 50;
-let gameRecipeLength = 4;
+// initial level setup
+let currentLevel = 0;
+const levelSettings = [
+  { time: 45, points: 20, recipeLength: 4 },
+  { time: 45, points: 30, recipeLength: 4 },
+  { time: 45, points: 40, recipeLength: 4 },
+];
 
 const allIngredients = baseIngredients.concat(randomIngredients);
 const arrayOfAvailableIngredients = allIngredients;
-const cookingGame = new CookingGame(baseIngredients, randomIngredients, gamePoints, gameRecipeLength);
-const chronometer = new Chronometer(gameTime);
+const cookingGame = new CookingGame(
+  baseIngredients,
+  randomIngredients,
+  levelSettings[currentLevel].points,
+  levelSettings[currentLevel].recipeLength
+);
+const chronometer = new Chronometer(levelSettings[currentLevel].time);
 
 function startNewGame() {
-  // if (currentLevel === 2) {
-  //   gameTime = 45;
-  //   gamePoints = 60;
-  // }
+  displayPoints();
+  levelElm.innerHTML = `LEVEL ${currentLevel + 1}`;
   const recipe = cookingGame.createRandomRecipe();
   renderIngredientsList(arrayOfAvailableIngredients);
   renderRecipe(recipe);
@@ -117,6 +124,8 @@ function submitPlayerSelection() {
       alert(`WOW, YOU WON THE GAME!!`);
       cookingGame.randomRecipe = [];
       randomCombinationElm.innerHTML = "";
+      cookingGame.playerPoints = 0;
+      removeMessage();
     } else {
       cookingGame.randomRecipe = [];
       randomCombinationElm.innerHTML = "";
@@ -137,16 +146,12 @@ clearButton.addEventListener("click", clearPlayerSelection);
 const submitButton = document.getElementById("submit-selection");
 submitButton.addEventListener("click", submitPlayerSelection);
 
-// DISPLAY POINTS
-const scoreTable = document.getElementById("score-table");
-scoreTable.innerHTML = `PLAYER POINTS:  ${cookingGame.playerPoints} / ${cookingGame.maxPoints}`;
-
 function displayPoints() {
-  scoreTable.innerHTML = `${cookingGame.playerPoints} / ${cookingGame.maxPoints}`;
+  scoreTable.innerHTML = `PLAYER POINTS: ${cookingGame.playerPoints} / ${levelSettings[currentLevel].points}`;
 }
 
 function checkIfWon() {
-  if (cookingGame.playerPoints === cookingGame.maxPoints && chronometer.currentTime > 0) {
+  if (cookingGame.playerPoints === levelSettings[currentLevel].points && chronometer.currentTime > 0) {
     currentLevel++;
     $("#exampleModal").modal("show");
     chronometer.stop();
@@ -196,27 +201,12 @@ $(window).on("load", function () {
 
 $("#exampleModal").on("show.bs.modal", function (event) {
   var modal = $(this);
-  // if (currentLevel === 1) {
-  modal.find("#modal-title").html(`Welcome to level ${currentLevel}`);
-  modal.find("#modal-inner-text").html(`Collect ${gamePoints} points in ${gameTime} seconds`);
-  // }
-  // var button = $(event.relatedTarget) // Button that triggered the modal
-  // var recipient = button.data('whatever') // Extract info from data-* attributes
-  // // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  // var modal = $(this);
-  // modal.find("#modal-title").html(`Welcome to level ${currentLevel}`);
-  // modal.find("#modal-inner-text").html(`Collect ${gamePoints} points in ${gameTime} seconds`);
-  // modal.find('.modal-body input').val(recipient)
+  modal.find("#modal-title").html(`Welcome to level ${currentLevel + 1}`);
+  modal
+    .find("#modal-inner-text")
+    .html(`Collect ${levelSettings[currentLevel].points} points in ${levelSettings[currentLevel].time} seconds`);
 });
 
 $("#exampleModal").on("hidden.bs.modal", function () {
   startNewGame();
 });
-
-/*
-if (points > 400) {
-  currentLevel++;
-  $("#exampleModal").modal("show");
-}
-*/
