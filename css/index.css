@@ -53,12 +53,12 @@ li {
 }
 
 #taco-button {
-  background-image: url(/images/hard-taco.png);
+  background-image: url(../images/hard-taco.png);
   background-size: cover;
 }
 
 #burger-button {
-  background-image: url(/images/burger.png);
+  background-image: url(../images/burger.png);
   background-size: cover;
 }
 
