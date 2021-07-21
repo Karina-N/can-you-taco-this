@@ -1,6 +1,19 @@
 import Chronometer from "./Chronometer.js";
 import CookingGame from "./CookingGame.js";
-import { baseIngredients, randomIngredients } from "./data.js";
+import { baseIngredientsTaco, randomIngredientsTaco, baseIngredientsBurger, randomIngredientsBurger } from "./data.js";
+
+let baseIngredients;
+let randomIngredients;
+const urlParams = new URLSearchParams(window.location.search);
+
+const myParam = urlParams.get("recipe");
+if (myParam === "taco") {
+  baseIngredients = baseIngredientsTaco;
+  randomIngredients = randomIngredientsTaco;
+} else if (myParam === "burger") {
+  baseIngredients = baseIngredientsBurger;
+  randomIngredients = randomIngredientsBurger;
+}
 
 const allIngredients = baseIngredients.concat(randomIngredients);
 
