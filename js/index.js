@@ -17,7 +17,7 @@ function renderRecipe() {
   cookingGame.createRandomRecipe().forEach((item) => {
     const randomRecipeItem = document.createElement("li");
     randomRecipe.appendChild(randomRecipeItem);
-    randomRecipeItem.setAttribute("style", `background-image: url(${item.img})`);
+    randomRecipeItem.setAttribute("style", `background-image: url('..'${item.img})`);
   });
 }
 
