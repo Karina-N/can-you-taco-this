@@ -21,14 +21,14 @@
 
 #random-combination,
 .buttons,
-#player-selection ul {
+#player-selection {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-#player-selection {
+.player-selection-div {
   display: grid;
   grid-template-columns: 1fr 20vw;
   grid-template-areas: "list buttons";
@@ -38,11 +38,11 @@
   grid-area: buttons;
 }
 
-#player-selection ul {
+#player-selection {
   grid-area: list;
 }
 
-#list-of-all-ingredients ul {
+#list-of-all-ingredients {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;

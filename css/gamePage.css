@@ -34,7 +34,7 @@ body {
   width: 8vh;
   background-size: cover;
 }
-#player-selection {
+.player-selection-div {
   border-top: 4px solid black;
   border-left: 4px solid black;
 }

@@ -4,8 +4,10 @@ import { baseIngredientsTaco, randomIngredientsTaco, baseIngredientsBurger, rand
 
 let baseIngredients;
 let randomIngredients;
+let playerSelectionList = [];
 
 const randomCombinationElm = document.getElementById("random-combination");
+const listOfAllIngredientsElm = document.getElementById("list-of-all-ingredients");
 
 // get query params
 const urlParams = new URLSearchParams(window.location.search);
@@ -48,25 +50,17 @@ function renderRecipe(recipe) {
   });
 }
 
-// Displaying list of all ingredients to be clicked
-const listOfAllIngredientsDiv = document.getElementById("list-of-all-ingredients");
-const allIngredientsUL = document.createElement("ul");
-listOfAllIngredientsDiv.appendChild(allIngredientsUL);
-
 // generate all ingredients list
 for (let i = 0; i < allIngredients.length; i++) {
   const listedIngredient = document.createElement("li");
-  allIngredientsUL.appendChild(listedIngredient);
+  listOfAllIngredientsElm.appendChild(listedIngredient);
   listedIngredient.setAttribute("class", "ingredient");
   listedIngredient.setAttribute("style", `background-image: url("${allIngredients[i].img}")`);
   listedIngredient.setAttribute("data-ingredient", allIngredients[i].name);
 }
 
 // Displaying player selection
-const playerSelectionDiv = document.getElementById("player-selection");
-let playerSelectionList = [];
-const playerSelectionUl = document.createElement("ul");
-playerSelectionDiv.appendChild(playerSelectionUl);
+const playerSelectionElm = document.getElementById("player-selection");
 
 document.querySelector("#list-of-all-ingredients").addEventListener("click", function (e) {
   const tryAgainMessage = document.querySelector("#try-again-button");
@@ -75,7 +69,7 @@ document.querySelector("#list-of-all-ingredients").addEventListener("click", fun
   wellDoneMessage.setAttribute("style", "display:none");
   // if the selection not full yet, add another item
   if (playerSelectionList.length < cookingGame.recipeLength) {
-    playerSelectionUl.innerHTML = "";
+    playerSelectionElm.innerHTML = "";
 
     if (e.target.classList.contains("ingredient")) {
       const indexOfClickedElement = allIngredients.findIndex(
@@ -85,7 +79,7 @@ document.querySelector("#list-of-all-ingredients").addEventListener("click", fun
 
       playerSelectionList.forEach((item) => {
         const listItem = document.createElement("li");
-        playerSelectionUl.appendChild(listItem);
+        playerSelectionElm.appendChild(listItem);
         listItem.setAttribute("style", `background-image: url("${item.img}")`);
         listItem.setAttribute("data-ingredient", item.name);
       });
@@ -94,7 +88,7 @@ document.querySelector("#list-of-all-ingredients").addEventListener("click", fun
 });
 
 function clearPlayerSelection() {
-  playerSelectionUl.innerHTML = "";
+  playerSelectionElm.innerHTML = "";
   playerSelectionList = [];
 }
 
