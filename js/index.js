@@ -4,8 +4,11 @@ import { baseIngredientsTaco, randomIngredientsTaco, baseIngredientsBurger, rand
 
 let baseIngredients;
 let randomIngredients;
-const urlParams = new URLSearchParams(window.location.search);
 
+const randomCombinationElm = document.getElementById("random-combination");
+
+// get query params
+const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get("recipe");
 if (myParam === "taco") {
   baseIngredients = baseIngredientsTaco;
@@ -21,15 +24,26 @@ const allIngredients = baseIngredients.concat(randomIngredients);
 const cookingGame = new CookingGame(baseIngredients, randomIngredients, 100, 4);
 const chronometer = new Chronometer(30);
 
-// Displaying randomRecipe
-const randomCombinationDiv = document.getElementById("random-combination");
-const randomRecipe = document.createElement("ul");
-randomCombinationDiv.appendChild(randomRecipe);
+// function startNewGame(level = 1) {
+//   if (level === 2) {
+//     // cookingGame.randomIngredients = myArray;
+//     cookingGame.maxPoints = 400;
+//   }
+//   const recipe = cookingGame.createRandomRecipe();
+//   renderRecipe(recipe);
+//   chronometer.start(printTime);
+// }
 
-function renderRecipe() {
-  cookingGame.createRandomRecipe().forEach((item) => {
+function startNewGame() {
+  const recipe = cookingGame.createRandomRecipe();
+  renderRecipe(recipe);
+  chronometer.start(printTime);
+}
+
+function renderRecipe(recipe) {
+  recipe.forEach((item) => {
     const randomRecipeItem = document.createElement("li");
-    randomRecipe.appendChild(randomRecipeItem);
+    randomCombinationElm.appendChild(randomRecipeItem);
     randomRecipeItem.setAttribute("style", `background-image: url("${item.img}")`);
   });
 }
@@ -88,17 +102,17 @@ function submitPlayerSelection() {
   const originalArray = cookingGame.randomRecipe.map((item) => item.name);
   const createdArray = playerSelectionList.map((item) => item.name);
   if (JSON.stringify(originalArray) === JSON.stringify(createdArray)) {
-    cookingGame.playerPoints += 50;
+    cookingGame.playerPoints += 100;
     displayPoints();
     if (checkIfWon()) {
       alert(`WOW, YOU WON THE GAME!!`);
       cookingGame.randomRecipe = [];
-      randomRecipe.innerHTML = "";
+      randomCombinationElm.innerHTML = "";
     } else {
       const wellDoneMessage = document.querySelector("#well-done-button");
       wellDoneMessage.setAttribute("style", "display:block");
       cookingGame.randomRecipe = [];
-      randomRecipe.innerHTML = "";
+      randomCombinationElm.innerHTML = "";
       renderRecipe();
     }
   } else {
@@ -144,10 +158,10 @@ function printTime() {
     secUniElement.innerHTML = 0;
 
     cookingGame.randomRecipe = [];
-    randomRecipe.innerHTML = "";
+    randomCombinationElm.innerHTML = "";
     clearPlayerSelection();
     cookingGame.randomRecipe = [];
-    randomRecipe.innerHTML = "";
+    randomCombinationElm.innerHTML = "";
     alert("BETTER LUCK NEXT TIME!");
   } else {
     printSeconds();
@@ -172,6 +186,5 @@ $(window).on("load", function () {
 });
 
 $("#exampleModal").on("hidden.bs.modal", function () {
-  renderRecipe();
-  chronometer.start(printTime);
+  startNewGame();
 });
