@@ -16,7 +16,6 @@ const randomCombinationElm = document.getElementById("random-combination");
 const playerSelectionElm = document.getElementById("player-selection");
 const listOfAllIngredientsElm = document.getElementById("list-of-all-ingredients");
 const messageElm = document.querySelector("#message");
-// const winnerStatusElm = document.getElementById("winner-status-message");
 
 let baseIngredients;
 let randomIngredients;
@@ -39,18 +38,19 @@ if (myParam === "taco") {
 // initial level setup
 let currentLevel = 0;
 const levelSettings = [
-  { time: 15, points: 20, recipeLength: 4 },
-  { time: 45, points: 30, recipeLength: 4 },
-  { time: 45, points: 40, recipeLength: 4 },
+  { time: 45, points: 30, oneLevelIngredients: 6 },
+  { time: 45, points: 50, oneLevelIngredients: 6 },
+  { time: 45, points: 60, oneLevelIngredients: 6 },
 ];
 
 const allIngredients = baseIngredients.concat(randomIngredients);
-const arrayOfAvailableIngredients = allIngredients;
+const currentLevelIngredients = allIngredients.slice(0, levelSettings[currentLevel].oneLevelIngredients);
 const cookingGame = new CookingGame(
   baseIngredients,
   randomIngredients,
   levelSettings[currentLevel].points,
-  levelSettings[currentLevel].recipeLength
+  4,
+  levelSettings[currentLevel].oneLevelIngredients
 );
 const chronometer = new Chronometer(levelSettings[currentLevel].time);
 
@@ -59,7 +59,7 @@ function startNewGame() {
   renderPoints();
   levelElm.innerHTML = `LEVEL ${currentLevel + 1}`;
   const recipe = cookingGame.createRandomRecipe();
-  renderIngredientsList(arrayOfAvailableIngredients);
+  renderIngredientsList(allIngredients, currentLevelIngredients);
   renderRecipe(recipe);
   chronometer.start(printTime);
 }
@@ -72,13 +72,20 @@ function renderRecipe(recipe) {
   });
 }
 
-function renderIngredientsList(arrayOfAvailableIngredients) {
-  for (let i = 0; i < arrayOfAvailableIngredients.length; i++) {
+function renderIngredientsList(allIngredients, currentLevelIngredients) {
+  for (let i = 0; i < currentLevelIngredients.length; i++) {
     const listedIngredient = document.createElement("li");
     listOfAllIngredientsElm.appendChild(listedIngredient);
     listedIngredient.setAttribute("class", "ingredient");
-    listedIngredient.setAttribute("style", `background-image: url("${arrayOfAvailableIngredients[i].img}")`);
-    listedIngredient.setAttribute("data-ingredient", arrayOfAvailableIngredients[i].name);
+    listedIngredient.setAttribute("style", `background-image: url("${currentLevelIngredients[i].img}")`);
+    listedIngredient.setAttribute("data-ingredient", currentLevelIngredients[i].name);
+  }
+  for (let i = currentLevelIngredients.length; i < allIngredients.length; i++) {
+    const listedIngredient = document.createElement("li");
+    listOfAllIngredientsElm.appendChild(listedIngredient);
+    listedIngredient.setAttribute("class", "fillers");
+    listedIngredient.setAttribute("style", `background-image: url(./images/question-mark.png)`);
+    listedIngredient.style.backgroundSize = "30px";
   }
 }
 
@@ -118,7 +125,7 @@ function submitPlayerSelection() {
     renderMessage("success");
     renderPoints();
     if (checkIfWon()) {
-      alert(`WOW, YOU WON THE GAME!!`);
+      // alert(`WOW, YOU WON THE GAME!!`);
       cookingGame.randomRecipe = [];
       randomCombinationElm.innerHTML = "";
       cookingGame.playerPoints = 0;

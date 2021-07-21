@@ -110,6 +110,11 @@ button:focus {
   cursor: pointer;
 }
 
+.fillers {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 ul {
   list-style-type: none;
 }
