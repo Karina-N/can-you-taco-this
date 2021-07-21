@@ -9,12 +9,14 @@ import {
   randomIngredientsSalad,
 } from "./data.js";
 
+// html elements
 const levelElm = document.getElementById("level");
 const scoreTable = document.getElementById("score-table");
 const randomCombinationElm = document.getElementById("random-combination");
 const playerSelectionElm = document.getElementById("player-selection");
 const listOfAllIngredientsElm = document.getElementById("list-of-all-ingredients");
 const messageElm = document.querySelector("#message");
+// const winnerStatusElm = document.getElementById("winner-status-message");
 
 let baseIngredients;
 let randomIngredients;
@@ -37,7 +39,7 @@ if (myParam === "taco") {
 // initial level setup
 let currentLevel = 0;
 const levelSettings = [
-  { time: 45, points: 20, recipeLength: 4 },
+  { time: 15, points: 20, recipeLength: 4 },
   { time: 45, points: 30, recipeLength: 4 },
   { time: 45, points: 40, recipeLength: 4 },
 ];
@@ -54,7 +56,7 @@ const chronometer = new Chronometer(levelSettings[currentLevel].time);
 
 function startNewGame() {
   listOfAllIngredientsElm.innerHTML = "";
-  displayPoints();
+  renderPoints();
   levelElm.innerHTML = `LEVEL ${currentLevel + 1}`;
   const recipe = cookingGame.createRandomRecipe();
   renderIngredientsList(arrayOfAvailableIngredients);
@@ -78,22 +80,6 @@ function renderIngredientsList(arrayOfAvailableIngredients) {
     listedIngredient.setAttribute("style", `background-image: url("${arrayOfAvailableIngredients[i].img}")`);
     listedIngredient.setAttribute("data-ingredient", arrayOfAvailableIngredients[i].name);
   }
-}
-
-function renderMessage(status) {
-  if (status === "success") {
-    messageElm.innerHTML = "Well done!";
-    messageElm.style.color = "green";
-    messageElm.style.display = "block";
-  } else if (status === "failure") {
-    messageElm.innerHTML = "Try again!";
-    messageElm.style.color = "#ed4234";
-    messageElm.style.display = "block";
-  }
-}
-
-function removeMessage() {
-  messageElm.innerHTML = "";
 }
 
 document.querySelector("#list-of-all-ingredients").addEventListener("click", function (e) {
@@ -130,7 +116,7 @@ function submitPlayerSelection() {
   if (JSON.stringify(originalArray) === JSON.stringify(createdArray)) {
     cookingGame.playerPoints += 10;
     renderMessage("success");
-    displayPoints();
+    renderPoints();
     if (checkIfWon()) {
       alert(`WOW, YOU WON THE GAME!!`);
       cookingGame.randomRecipe = [];
@@ -149,6 +135,39 @@ function submitPlayerSelection() {
   clearPlayerSelection();
 }
 
+function renderMessage(status) {
+  if (status === "success") {
+    messageElm.innerHTML = "Well done!";
+    messageElm.style.color = "green";
+    messageElm.style.display = "block";
+  } else if (status === "failure") {
+    messageElm.innerHTML = "Try again!";
+    messageElm.style.color = "#ed4234";
+    messageElm.style.display = "block";
+  }
+}
+
+function removeMessage() {
+  messageElm.innerHTML = "";
+}
+
+function renderGameOverMessage() {
+  const gameOverElm = document.getElementById("game-over-message");
+  gameOverElm.style.display = "block";
+}
+
+// function renderWinnerStatusMessage(status) {
+//   if (status === "success") {
+//     winnerStatusElm.innerHTML = "YOU WIN!";
+//     winnerStatusElm.style.color = "green";
+//     winnerStatusElm.style.display = "block";
+//   } else if (status === "failure") {
+//     winnerStatusElm.innerHTML = "GAME OVER";
+//     winnerStatusElm.style.color = "#ed4234";
+//     winnerStatusElm.style.display = "block";
+//   }
+// }
+
 // CLEAR BUTTON
 const clearButton = document.getElementById("clear-selection");
 clearButton.addEventListener("click", clearPlayerSelection);
@@ -157,7 +176,7 @@ clearButton.addEventListener("click", clearPlayerSelection);
 const submitButton = document.getElementById("submit-selection");
 submitButton.addEventListener("click", submitPlayerSelection);
 
-function displayPoints() {
+function renderPoints() {
   scoreTable.innerHTML = `PLAYER POINTS: ${cookingGame.playerPoints} / ${levelSettings[currentLevel].points}`;
 }
 
@@ -166,8 +185,7 @@ function checkIfWon() {
     currentLevel++;
     $("#exampleModal").modal("show");
     chronometer.stop();
-    secDecElement.innerHTML = 0;
-    secUniElement.innerHTML = 0;
+    resetTimer();
     return true;
   }
 }
@@ -179,15 +197,14 @@ const secUniElement = document.getElementById("secUni");
 function printTime() {
   if (chronometer.currentTime < 1) {
     chronometer.stop();
-    secDecElement.innerHTML = 0;
-    secUniElement.innerHTML = 0;
+    resetTimer();
 
     cookingGame.randomRecipe = [];
     randomCombinationElm.innerHTML = "";
     clearPlayerSelection();
     cookingGame.randomRecipe = [];
     randomCombinationElm.innerHTML = "";
-    alert("BETTER LUCK NEXT TIME!");
+    renderGameOverMessage();
   } else {
     printSeconds();
   }
@@ -200,6 +217,11 @@ function printTime() {
     secDecElement.innerHTML = firstDigit;
     secUniElement.innerHTML = secondDigit;
   }
+}
+
+function resetTimer() {
+  secDecElement.innerHTML = 0;
+  secUniElement.innerHTML = 0;
 }
 
 // MODAL

@@ -13,10 +13,6 @@ class Chronometer {
     }, 1000);
   }
 
-  //   getMinutes() {
-  //     return Math.floor(this.currentTime / 60);
-  //   }
-
   getSeconds() {
     return this.currentTime % 60;
   }
@@ -40,7 +36,6 @@ class Chronometer {
   }
 
   split() {
-    // return `${this.computeTwoDigitNumber(this.getMinutes())}:${this.computeTwoDigitNumber(this.getSeconds())}`;
     return `${this.computeTwoDigitNumber(this.getSeconds())}`;
   }
 }
