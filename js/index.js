@@ -17,7 +17,7 @@ function renderRecipe() {
   cookingGame.createRandomRecipe().forEach((item) => {
     const randomRecipeItem = document.createElement("li");
     randomRecipe.appendChild(randomRecipeItem);
-    randomRecipeItem.setAttribute("style", `background-image: url('..'+${item.img})`);
+    randomRecipeItem.setAttribute("style", `background-image: url("..${item.img}")`);
   });
 }
 
@@ -31,7 +31,7 @@ for (let i = 0; i < allIngredients.length; i++) {
   const listedIngredient = document.createElement("li");
   allIngredientsUL.appendChild(listedIngredient);
   listedIngredient.setAttribute("class", "ingredient");
-  listedIngredient.setAttribute("style", `background-image: url(${allIngredients[i].img})`);
+  listedIngredient.setAttribute("style", `background-image: url("..${allIngredients[i].img}")`);
   listedIngredient.setAttribute("data-ingredient", allIngredients[i].name);
 }
 
