@@ -11,7 +11,7 @@ class CookingGame {
 
   createRandomRecipe() {
     this.randomRecipe.unshift(this.baseIngredients[0]);
-    const oneLevelIngredientsArray = this.randomIngredients.slice(0, this.oneLevelIngredients - 1);
+    let oneLevelIngredientsArray = this.randomIngredients.slice(0, this.oneLevelIngredients - 1);
 
     for (let i = 0; this.randomRecipe.length < this.recipeLength; i++) {
       let randomIngredient = oneLevelIngredientsArray[Math.floor(Math.random() * oneLevelIngredientsArray.length)];

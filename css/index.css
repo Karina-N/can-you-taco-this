@@ -10,6 +10,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* padding-top: 100px; */
 }
 
 .header,
@@ -26,7 +27,7 @@ img {
 }
 
 h1 {
-  margin: 20px 0;
+  /* margin: 20px 0; */
 }
 
 .header > p {
@@ -70,10 +71,11 @@ h1 {
   transition: transform 0.4s;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 760px) {
   .container {
+    height: 90%;
     width: 90%;
-    margin-top: 80px;
+    /* margin-top: 80px; */
   }
 
   .middle div {

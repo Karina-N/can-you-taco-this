@@ -42,16 +42,23 @@ body {
   background-size: cover;
 }
 
-#game-over-message {
+#game-over-message,
+#winner-message {
   display: none;
   font-weight: bold;
   background-color: black;
-  color: #ed4234;
   padding: 10px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
+}
+#game-over-message {
+  color: #ed4234;
+}
+#winner-message {
+  color: green;
 }
 
 .player-selection-div {
@@ -74,12 +81,12 @@ button {
   border: none;
   border-radius: 3px;
   box-shadow: 4px 4px rgb(196, 196, 32);
-  padding: 10px 0;
+  padding: 6px 0;
   font: inherit;
   font-weight: bold;
   cursor: pointer;
   margin: 16px;
-  width: 160px;
+  width: 140px;
 }
 
 #submit-selection,
@@ -133,9 +140,9 @@ ul {
   .timer {
     font-size: 14px;
   }
-
   #random-combination {
     padding: 0;
+    margin-right: 30px;
   }
 
   .player-selection-div {

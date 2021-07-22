@@ -38,18 +38,25 @@ if (myParam === "taco") {
 // initial level setup
 let currentLevel = 0;
 const levelSettings = [
-  { time: 45, points: 30, oneLevelIngredients: 6 },
-  { time: 45, points: 50, oneLevelIngredients: 6 },
-  { time: 45, points: 60, oneLevelIngredients: 6 },
+  { time: 45, points: 10, randLength: 4, oneLevelIngredients: 4 },
+  { time: 40, points: 10, randLength: 4, oneLevelIngredients: 6 },
+  { time: 40, points: 40, randLength: 4, oneLevelIngredients: 6 },
+  { time: 40, points: 60, randLength: 4, oneLevelIngredients: 6 },
+  { time: 35, points: 60, randLength: 4, oneLevelIngredients: 6 },
+  { time: 35, points: 70, randLength: 4, oneLevelIngredients: 8 },
+  { time: 35, points: 80, randLength: 4, oneLevelIngredients: 8 },
+  { time: 35, points: 80, randLength: 4, oneLevelIngredients: 10 },
+  { time: 30, points: 80, randLength: 4, oneLevelIngredients: 10 },
+  { time: 30, points: 100, randLength: 4, oneLevelIngredients: 10 },
 ];
 
 const allIngredients = baseIngredients.concat(randomIngredients);
-const currentLevelIngredients = allIngredients.slice(0, levelSettings[currentLevel].oneLevelIngredients);
+let currentLevelIngredients = allIngredients.slice(0, levelSettings[currentLevel].oneLevelIngredients);
 const cookingGame = new CookingGame(
   baseIngredients,
   randomIngredients,
   levelSettings[currentLevel].points,
-  4,
+  levelSettings[currentLevel].randLength,
   levelSettings[currentLevel].oneLevelIngredients
 );
 const chronometer = new Chronometer(levelSettings[currentLevel].time);
@@ -58,9 +65,12 @@ function startNewGame() {
   listOfAllIngredientsElm.innerHTML = "";
   renderPoints();
   levelElm.innerHTML = `LEVEL ${currentLevel + 1}`;
-  const recipe = cookingGame.createRandomRecipe();
+  currentLevelIngredients = allIngredients.slice(0, levelSettings[currentLevel].oneLevelIngredients);
+  cookingGame.oneLevelIngredients = levelSettings[currentLevel].oneLevelIngredients;
+  let recipe = cookingGame.createRandomRecipe();
   renderIngredientsList(allIngredients, currentLevelIngredients);
   renderRecipe(recipe);
+  chronometer.currentTime = levelSettings[currentLevel].time;
   chronometer.start(printTime);
 }
 
@@ -125,7 +135,6 @@ function submitPlayerSelection() {
     renderMessage("success");
     renderPoints();
     if (checkIfWon()) {
-      // alert(`WOW, YOU WON THE GAME!!`);
       cookingGame.randomRecipe = [];
       randomCombinationElm.innerHTML = "";
       cookingGame.playerPoints = 0;
@@ -163,17 +172,10 @@ function renderGameOverMessage() {
   gameOverElm.style.display = "block";
 }
 
-// function renderWinnerStatusMessage(status) {
-//   if (status === "success") {
-//     winnerStatusElm.innerHTML = "YOU WIN!";
-//     winnerStatusElm.style.color = "green";
-//     winnerStatusElm.style.display = "block";
-//   } else if (status === "failure") {
-//     winnerStatusElm.innerHTML = "GAME OVER";
-//     winnerStatusElm.style.color = "#ed4234";
-//     winnerStatusElm.style.display = "block";
-//   }
-// }
+function renderWinnerMessage() {
+  const winnerElm = document.getElementById("winner-message");
+  winnerElm.style.display = "block";
+}
 
 // CLEAR BUTTON
 const clearButton = document.getElementById("clear-selection");
@@ -189,11 +191,15 @@ function renderPoints() {
 
 function checkIfWon() {
   if (cookingGame.playerPoints === levelSettings[currentLevel].points && chronometer.currentTime > 0) {
-    currentLevel++;
-    $("#exampleModal").modal("show");
     chronometer.stop();
-    resetTimer();
-    return true;
+    if (currentLevel === 1) {
+      renderWinnerMessage();
+    } else {
+      currentLevel++;
+      $("#exampleModal").modal("show");
+      resetTimer();
+      return true;
+    }
   }
 }
 
