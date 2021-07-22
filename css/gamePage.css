@@ -57,7 +57,7 @@ body {
 .player-selection-div {
   border-left: 4px solid black;
   height: 45vh;
-  /* width: 70%; */
+  width: 60vw;
 }
 #player-selection li {
   margin: 4px;
@@ -161,11 +161,11 @@ ul {
   }
 
   #list-of-all-ingredients {
-    padding: 5px 0;
+    padding: 0;
   }
 
   #list-of-all-ingredients li {
-    margin: 16px;
+    margin: 10px;
     height: 6vh;
     width: 6vh;
   }

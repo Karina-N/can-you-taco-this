@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-rows: 10vh 45vh 32vh;
+  grid-template-rows: 10vh 45vh 36vh;
   grid-template-areas:
     "status"
     "middle"
@@ -46,7 +46,7 @@
 
 @media (max-width: 760px) {
   .container {
-    grid-template-rows: 8vh 38vh 38vh;
+    grid-template-rows: 8vh 40vh 40vh;
     width: 90%;
   }
 
