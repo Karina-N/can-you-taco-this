@@ -38,8 +38,8 @@ if (myParam === "taco") {
 // initial level setup
 let currentLevel = 0;
 const levelSettings = [
-  { time: 45, points: 10, randLength: 4, oneLevelIngredients: 4 },
-  { time: 40, points: 10, randLength: 4, oneLevelIngredients: 6 },
+  { time: 45, points: 20, randLength: 4, oneLevelIngredients: 4 },
+  { time: 40, points: 40, randLength: 4, oneLevelIngredients: 4 },
   { time: 40, points: 40, randLength: 4, oneLevelIngredients: 6 },
   { time: 40, points: 60, randLength: 4, oneLevelIngredients: 6 },
   { time: 35, points: 60, randLength: 4, oneLevelIngredients: 6 },
@@ -192,7 +192,7 @@ function renderPoints() {
 function checkIfWon() {
   if (cookingGame.playerPoints === levelSettings[currentLevel].points && chronometer.currentTime > 0) {
     chronometer.stop();
-    if (currentLevel === 1) {
+    if (currentLevel === 9) {
       renderWinnerMessage();
     } else {
       currentLevel++;

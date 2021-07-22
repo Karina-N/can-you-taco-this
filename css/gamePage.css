@@ -177,3 +177,18 @@ ul {
     width: 6vh;
   }
 }
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1600px;
+  }
+  .player-selection-div {
+    margin-right: 100px;
+  }
+}
+
+@media (min-width: 1900px) {
+  .container {
+    max-width: 1900px;
+  }
+}
