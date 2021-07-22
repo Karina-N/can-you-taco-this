@@ -69,3 +69,15 @@ h1 {
   transform: scale(1.2);
   transition: transform 0.4s;
 }
+
+@media (max-width: 850px) {
+  .container {
+    width: 90%;
+    margin-top: 80px;
+  }
+
+  .middle div {
+    flex-direction: column;
+    margin: 0;
+  }
+} ;

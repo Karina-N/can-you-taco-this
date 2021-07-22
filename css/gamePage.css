@@ -15,23 +15,21 @@ body {
   border: 4px solid black;
 }
 
-/* h1 {
-  text-align: center;
-  line-height: 7vh;
-} */
-
 .game-status {
-  text-align: center;
-  line-height: 10vh;
   border-bottom: 4px solid black;
 }
 
 .timer {
   font-size: 24px;
+  font-weight: bold;
 }
 
 .middle {
   position: relative;
+}
+
+.random-combination-div {
+  width: 30%;
 }
 #random-combination {
   padding: 7px 0;
@@ -42,9 +40,6 @@ body {
   height: 8vh;
   width: 8vh;
   background-size: cover;
-}
-.player-selection-div {
-  border-left: 4px solid black;
 }
 
 #game-over-message {
@@ -59,6 +54,11 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.player-selection-div {
+  border-left: 4px solid black;
+  height: 45vh;
+  /* width: 70%; */
+}
 #player-selection li {
   margin: 4px;
   height: 8vh;
@@ -67,6 +67,7 @@ body {
 }
 .buttons {
   padding-right: 40px;
+  margin-left: 20%;
 }
 button {
   background: yellow;
@@ -117,4 +118,55 @@ button:focus {
 
 ul {
   list-style-type: none;
+}
+
+@media (max-width: 760px) {
+  .container {
+    margin-top: 0;
+  }
+  .game-status {
+    text-align: left;
+    line-height: 8vh;
+    font-size: 12px;
+  }
+
+  .timer {
+    font-size: 14px;
+  }
+
+  #random-combination {
+    padding: 0;
+  }
+
+  .player-selection-div {
+    height: 32vh;
+  }
+
+  #player-selection {
+    margin-bottom: 0;
+  }
+
+  .buttons {
+    padding-right: 40px;
+  }
+  button {
+    padding: 5px 0;
+    margin: 5px;
+    width: 120px;
+  }
+
+  #player-selection li {
+    height: 6vh;
+    width: 6vh;
+  }
+
+  #list-of-all-ingredients {
+    padding: 5px 0;
+  }
+
+  #list-of-all-ingredients li {
+    margin: 16px;
+    height: 6vh;
+    width: 6vh;
+  }
 }
