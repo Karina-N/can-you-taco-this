@@ -127,6 +127,18 @@ ul {
   list-style-type: none;
 }
 
+.icons {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+}
+
+.icons a {
+  color: black;
+}
+
 @media (max-width: 760px) {
   .container {
     margin-top: 0;
