@@ -8,5 +8,6 @@ You get points by duplicating provided recipes.
 
 https://karina-n.github.io/can-you-taco-this/
 
-![can you taco this](https://user-images.githubusercontent.com/67471786/132459070-94867e8f-77b7-4956-a311-5b5dfaf1ab59.png)
+<img width="544" alt="can you taco this" src="https://user-images.githubusercontent.com/67471786/132459188-9a247658-b375-4b72-a19b-197731e49af5.png">
+
 
