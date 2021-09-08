@@ -1,6 +1,6 @@
 Welcome to my cooking game!
 
-##CAN YOU TACO THIS?
+## CAN YOU TACO THIS?
 If you like to cook or eat - it never hurts to stare at food!
 
 Goal of the game is to collect set amount of points within given time limit.
